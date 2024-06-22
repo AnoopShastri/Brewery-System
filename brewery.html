@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Brewery{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>{{ brewery.name }}</h2>
+        <p>{{ brewery.street }}</p>
+        <p>{{ brewery.city }}, {{ brewery.state }}</p>
+        <h3>Reviews</h3>
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <p><strong>{{ review.user.username }}:</strong> {{ review.rating }} / 5</p>
+                    <p>{{ review.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Add a Review</h3>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.rating.label }}
+                {{ form.rating(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }}
+                {{ form.description(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
